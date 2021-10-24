@@ -12,7 +12,7 @@ require(tidyverse)
 require(tigerstats)
 ```
 
-#Introduction
+# Introduction  
 
 Form three regression models; Model1 is SIMS~ARM, Model2 is SIMS~GRIP, and Model3 is SIMS~ARM+GRIP. For each model find a 95% prediction interval of SIMS given a value of 94  for GRIP and 88 for ARM. Compare Model1 with Model3 using anova. Write it up in a markdown document, push the project up to your github account and submit it back to canvas as link. 
 
@@ -22,6 +22,7 @@ Form three regression models; Model1 is SIMS~ARM, Model2 is SIMS~GRIP, and Model
 ```{r}
 plot(SIMS~ARM,data=data)
 ```
+This is a generic scatter plot of SIMS versus ARM  
 
 ```{r}
 basicNN <- ggplot(data,aes(y=SIMS,x=ARM))
@@ -38,7 +39,7 @@ summary.lm(model.1)
 basicNN + geom_point() + geom_smooth(method=lm)
 ``` 
 
-The greater the pounds of arm force(ARM), the greater the simulation(SIMS)
+The greater the pounds of arm force(ARM), the greater the simulation(SIMS)  
 
 
 ```{r}
@@ -62,7 +63,37 @@ predict.lm(model.1,newData,interval="prediction")
 
 ## SIMS~GRIP Regression
 
+```{r}
+plot(SIMS~GRIP,data=data)
+```
+This is a generic scatter plot of SIMS versus GRIP  
 
+```{r}
+basicNN <- ggplot(data,aes(y=SIMS,x=GRIP))
+```
+
+```{r}
+model.1 <- lm(SIMS~ARM,data=data)
+summary.lm(model.1)
+```
+
+```{r}
+basicNN + geom_point() + geom_smooth(method=lm)
+``` 
+
+
+The greater the pounds of grip force (GRIP), the greater simulation(SIMS)
+
+```{r}
+cor(SIMS~GRIP,data=data)
+```
+This number is the correlation between SIMS and GRIP force. 
+Correlation is a major of the linear association between the two variables. 
+
+```{r}
+model.1 <- lm(SIMS~GRIP,data=data)
+summary.lm(model.1)
+```
 ## SIMS~ARM+GRIP Regression
 
 
