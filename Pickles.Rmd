@@ -22,6 +22,7 @@ Form three regression models; Model1 is SIMS~ARM, Model2 is SIMS~GRIP, and Model
 ```{r}
 plot(SIMS~ARM,data=data)
 ```
+
 This is a generic scatter plot of SIMS versus ARM  
 
 ```{r}
@@ -66,6 +67,7 @@ predict.lm(model.1,newData,interval="prediction")
 ```{r}
 plot(SIMS~GRIP,data=data)
 ```
+
 This is a generic scatter plot of SIMS versus GRIP  
 
 ```{r}
@@ -91,9 +93,27 @@ This number is the correlation between SIMS and GRIP force.
 Correlation is a major of the linear association between the two variables. 
 
 ```{r}
-model.1 <- lm(SIMS~GRIP,data=data)
-summary.lm(model.1)
+model.2 <- lm(SIMS~GRIP,data=data)
+summary.lm(model.2)
 ```
+The equation is SIMS = -4.809675 + 0.045463 * GRIP
+
+```{r}
+newData=data.frame(GRIP=94,ARM=88)
+predict.lm(model.2,newData,interval="prediction")
+```
+
+Fit is the predicted ARM score when you have the ARM strength of 94
+
+the lwr and the upr are the 95% confidence interval for predicted SIMS score when the GRIP is 94
+
+Comparing the two models, model1 and model 2,
+Model1 (SIMS~ARM)has a slightly lower residual standard error score of 1.266 while model2 (SIMS~GRIP) scored at 1.295
+
+Model1 (SIMS~ARM) has a higher adjusted r square score of 0.647 while model2 (SIMS~GRIP) scored a lower 0.4053.
+
+Model2 is better because it has a higher residual standard than model1.
+
 ## SIMS~ARM+GRIP Regression
 
 
