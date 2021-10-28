@@ -123,10 +123,22 @@ model.3 <- lm(SIMS~ARM + GRIP,data=data)
 summary.lm(model.3)
 ``` 
 
-
 Model 3 seems to be the better model because the adjusted r square score than both model1 and model2, and also the residual standard error than model 1 or model2.
 
+```{r}
+cor(SIMS~ARM + GRIP,data=data)
+```
 
+## Prediction 
+
+```{r}
+newData=data.frame(GRIP=94,ARM=88)
+predict.lm(model.3,newData,interval="prediction")
+```
+
+fit is the predicted SIMS score when you have a GRIP strength of 94 and an ARM strength of 88.
+
+The lwr and the upr are the 95% confidence intervals for predicted SIMS score when the GRIP is 94 and the ARM strength of 88.
 ## Inferential Test
 
 This inferential test is to compare models.
@@ -141,5 +153,3 @@ anova(model.1,model.3)
 The p value is 0.00004994 which is very low.
 
 We reject the null hypothesis because the P value is too low; There is a difference in model2 and model3; we have evidence that model3 is better than model2.
-
-## MODEL COMPARISONS
